@@ -1,26 +1,10 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useContext } from 'react'
 import AuthContext from '../../srore/auth-context';
+import RegisterForm from './components/RegisterForm';
 
 const Register = () => {
 
     const authData = useContext(AuthContext)
-    
-    
-    const initialData = {
-        name:'',
-        userName:'',
-        password:''
-
-    };
-
-    const [data,setData] = useState(initialData);
-
-    const ChangeHandler = (e) => {
-        setData({
-            ...data,
-            [e.target.name]:e.target.value
-        });
-    };
     
     const validate = (data) => {
         if(data.name === ''|| data.name.length <4){
@@ -46,63 +30,21 @@ const Register = () => {
         return true;
     };
 
-    const submitHandler = (e) => {
-        console.log(data)
-        console.log(authData.dataBase)
+    const submitHandler = (e,data) => {
         e.preventDefault();
         const isValid = validate(data);
 
         if (isValid){
             authData.dataBase.push(data)
             localStorage.setItem('dataBase',JSON.stringify(authData.dataBase))
-            console.log(authData.dataBase)
             alert('Registered successfully')
         }
-        console.log('somethis wrong')
     };
 
   return (
     <div className="register-box border border-dark px-3 px-md-5 py-3">
         <h5 className='text-center'>Register</h5>
-        <form className='mt-5' method='post' onSubmit={submitHandler}>
-            <div className="mb-3">
-                <label htmlFor="register-name" className="form-label">Name</label>
-                <input type="text" 
-                   className="form-control"
-                   id="register-name" 
-                   placeholder="name"
-                   name='name'
-                   value={data.name}
-                   onChange={ChangeHandler} 
-                   />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="register-phone" className="form-label">Username</label>
-                <input type="text"
-                   className="form-control"
-                   id="register-usernmae"
-                   placeholder="username"
-                   name='userName'
-                   value={data.userName}
-                   onChange={ChangeHandler} 
-                   />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="register-Password" className="form-label">Password</label>
-                <input 
-                   type="password"
-                   className="form-control" 
-                   id="register-password" 
-                   placeholder="password"
-                   name='password'
-                   value={data.password} 
-                   onChange={ChangeHandler} 
-                   />
-            </div>
-            <div className="col-auto text-center">
-                <button type="submit" className="btn btn-primary mb-3 px-5">Submit</button>
-            </div>
-        </form>
+        <RegisterForm submitHandler={submitHandler}/>
     </div>
   )
 };

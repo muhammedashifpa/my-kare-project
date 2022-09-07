@@ -33,9 +33,9 @@ export const AuthGate = ({children}) => {
         
         if(!dataBase || dataBase === null){
             localStorage.setItem('dataBase',JSON.stringify([adminData]))
-            console.log('created Database')
         };
-    },[dataBase,]);
+        setDataBase(JSON.parse(localStorage.getItem('dataBase')))
+    },[]);
 
 
     //userDatabase setup
@@ -76,8 +76,6 @@ export const AuthGate = ({children}) => {
     }
 
     const validatePassword = (password,data) => {
-        console.log(data)
-
         if(String(password) === data.password) return true
         return false
 
@@ -86,8 +84,6 @@ export const AuthGate = ({children}) => {
     const LogInHandeler = (userName,password) => {
         for (let i = 0; i < dataBase.length; i++) {
             const isValidUserName = validateUserName(userName,dataBase[i]);
-            console.log(dataBase[i])
-            console.log(isValidUserName)
             if(isValidUserName){
                 const isValidPassword = validatePassword(password,dataBase[i])
                 if(isValidPassword){

@@ -17,7 +17,6 @@ const Authentication = () => {
     const width = window.innerWidth
     setWindowWidth(width)
     }
-    console.log(width)
     const component = width>=992? 
         <LargeScreen/>
         :

@@ -20,7 +20,6 @@ const Login = () => {
     
     const submitHandler = (e) => {
         e.preventDefault();
-        // console.log(data)
         LogInHandeler(data.userName,data.password);
     }
 

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AuthContext from '../../../srore/auth-context';
 
 const NavBar = () => {
   const {userData,logOutHander} = useContext(AuthContext);
-  const {path} = useParams()
+
   return (
     <Nav className="navbar navbar-expand bg-light py-3">
       <div className="container">
