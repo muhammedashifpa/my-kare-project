@@ -5,13 +5,16 @@ import App from './App';
 import {
   BrowserRouter,
 } from "react-router-dom";
+import { AuthGate } from './srore/auth-context';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthGate>
+        <App />
+      </AuthGate>
     </BrowserRouter>
   </React.StrictMode>
 );

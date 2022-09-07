@@ -4,15 +4,7 @@ import AuthContext from '../../srore/auth-context';
 const Register = () => {
 
     const authData = useContext(AuthContext)
-    const dataBase = authData.data;
-    console.log(dataBase)
     
-    // useEffect(()=>{
-    //     if(dataBase.length === 0){
-    //         localStorage.setItem('dataBase',JSON.stringify(dataBase))
-    //     };
-    //     console.log(dataBase);
-    // },[dataBase]);
     
     const initialData = {
         name:'',
@@ -32,7 +24,7 @@ const Register = () => {
     
     const validate = (data) => {
         if(data.name === ''|| data.name.length <4){
-            alert('The name number can\'t be empty! or less than 4 charecter')
+            alert('The name can\'t be empty! or less than 4 charecter')
             return false;
         };
 
@@ -41,8 +33,8 @@ const Register = () => {
             return false;
         };
 
-        for (let i = 0; i < dataBase.length; i++) {
-            if (dataBase[i].userName === data.userName){
+        for (let i = 0; i < authData.dataBase.length; i++) {
+            if (authData.dataBase[i].userName === data.userName){
                 alert('The username you entered is already exist!')
                 return false;
             }
@@ -56,19 +48,21 @@ const Register = () => {
 
     const submitHandler = (e) => {
         console.log(data)
+        console.log(authData.dataBase)
         e.preventDefault();
         const isValid = validate(data);
 
         if (isValid){
-            dataBase.push(data)
-            localStorage.setItem('dataBase',JSON.stringify(dataBase))
-            console.log(dataBase)
+            authData.dataBase.push(data)
+            localStorage.setItem('dataBase',JSON.stringify(authData.dataBase))
+            console.log(authData.dataBase)
             alert('Registered successfully')
-        };
+        }
+        console.log('somethis wrong')
     };
 
   return (
-    <div className="register-box border border-dark px-5 py-3">
+    <div className="register-box border border-dark px-3 px-md-5 py-3">
         <h5 className='text-center'>Register</h5>
         <form className='mt-5' method='post' onSubmit={submitHandler}>
             <div className="mb-3">

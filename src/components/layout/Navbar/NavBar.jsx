@@ -1,18 +1,19 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import AuthContext from '../../../srore/auth-context';
 
 const NavBar = () => {
-  const {data} = useContext(AuthContext);
+  const {userData,logOutHander} = useContext(AuthContext);
+  const {path} = useParams()
   return (
     <Nav className="navbar navbar-expand bg-light py-3">
       <div className="container">
         <Link to={'/'} className="navbar-brand">Mykare</Link>
-        {data.isLoggedIn&&
+        {userData.isLoggedIn&&
           <div className="d-flex align-items-center" >
-            <h6 className="mb-0 me-4" >Hi, Muhammed Ashif</h6>
-            <Link to={''}  className="btn btn-primary" >Log out</Link>
+            <h6 className="mb-0 me-4" >Hi, {userData.name}</h6>
+            <button type='button' onClick={logOutHander} className="btn btn-primary" >Log out</button>
           </div>
         }
       </div>

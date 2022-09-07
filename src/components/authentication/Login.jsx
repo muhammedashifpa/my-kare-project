@@ -2,9 +2,9 @@ import React,{useContext, useState} from 'react'
 import AuthContext from '../../srore/auth-context';
 
 const Login = () => {
-    const {loginHandler} = useContext(AuthContext);
+    const {LogInHandeler} = useContext(AuthContext);
     const initialData = {
-        phone:'',
+        userName:'',
         password:''
 
     }
@@ -20,22 +20,22 @@ const Login = () => {
     
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(data)
-        loginHandler()
+        // console.log(data)
+        LogInHandeler(data.userName,data.password);
     }
 
   return (
-    <div className="login-box border border-dark px-5 py-3">
+    <div className="login-box border border-dark px-3 px-md-5 py-3">
         <h5 className='text-center'>Login</h5>
         <form className='mt-5' method='post' onSubmit={submitHandler}>
             <div className="mb-3">
-                <label htmlFor="register-phone" className="form-label">Phone</label>
-                <input type="number" 
+                <label htmlFor="register-phone" className="form-label">Username</label>
+                <input type="text" 
                    className="form-control" 
                    id="login-phone" 
                    placeholder="881234"
-                   name='phone'
-                   value={data.phone}
+                   name='userName'
+                   value={data.userName}
                    onChange={ChangeHandler}
                 />
             </div>

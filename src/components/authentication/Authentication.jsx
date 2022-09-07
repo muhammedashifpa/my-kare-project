@@ -1,20 +1,29 @@
-import React from 'react'
-import Login from './Login'
-import Register from './Register'
+import React,{useEffect,useState} from 'react'
+import LargeScreen from './LargeScreen'
+import SmallScreen from './SmallScreen'
 
 const Authentication = () => {
-  return (
-    <div className="container ">
-        <div className="row py-5">
-            <div className="col-7">
-                <Register/>
-            </div>
-            <div className="col-5">
-                <Login/>
-            </div>
-        </div>
-    </div>
-  )
+  const [width, setWindowWidth] = useState(0)
+
+  useEffect(() => { 
+    updateDimensions();
+
+    window.addEventListener("resize", updateDimensions);
+    return () => 
+      window.removeEventListener("resize",updateDimensions);
+    }, [])
+
+  const updateDimensions = () => {
+    const width = window.innerWidth
+    setWindowWidth(width)
+    }
+    console.log(width)
+    const component = width>=992? 
+        <LargeScreen/>
+        :
+        <SmallScreen/>;
+
+  return component;
 }
 
 export default Authentication
